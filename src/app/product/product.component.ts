@@ -1,3 +1,4 @@
+import { ProductService } from './../services/product.service';
 import { AlertifyService } from './../services/alertify.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product';
@@ -6,19 +7,19 @@ import { Product } from './product';
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  providers: [AlertifyService]
+  providers: [AlertifyService, ProductService]
 })
 export class ProductComponent implements OnInit {
 
-  constructor(private alertifyService: AlertifyService) { }
+  constructor(private alertifyService: AlertifyService, private productService: ProductService) { }
 
   title = 'Ürün Listesi'
-  products: Product[] = [
-    { id: 1, name: 'Laptop', price: 2500, categoryId: 1, description: 'Asus ZenBook', imageUrl: "https://www.notebookcheck-tr.com/uploads/tx_nbc2/SL4_AMD_1.jpg" },
-    { id: 2, name: 'Mouse', price: 50, categoryId: 2, description: 'A4Tech', imageUrl: 'https://ayb.akinoncdn.com/products/2020/12/02/54024/4b3c9b41-99c8-4783-b29d-4842b809734b_size780x780_quality60_cropCenter.jpg' }
-  ]
+  products?: Product[]
 
   ngOnInit(): void {
+    this.productService.getProducts().subscribe(data => {
+      this.products = data
+    })
   }
 
   addToCart(product: Product) {
