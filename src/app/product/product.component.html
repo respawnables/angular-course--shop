@@ -1,21 +1,16 @@
-<h3 *ngIf="products; else noProduct">{{ title }}</h3>
-
+<!-- <h3 *ngIf="products; else noProduct">{{ title }}</h3> -->
+<app-category></app-category>
 <div class="mb-3 col-md-9">
-  <input
-    class="form-control"
-    id="productName"
-    placeholder="Ürün adı girin"
-  />
+  <input class="form-control" id="productName" placeholder="Ürün adı girin" />
   <small class="form-text text-muted">Arama Sonuçları</small>
 </div>
 
-<ng-template #noProduct>
-  <div class="alert alert-primary" role="alert">
-    Bu kategoride hiç ürün yok!
-  </div>
-</ng-template>
-
 <div class="row">
+  <ng-template #noProduct>
+    <div class="alert alert-primary" role="alert">
+      Bu kategoride hiç ürün yok!
+    </div>
+  </ng-template>
   <div *ngFor="let product of products" class="card m-2" style="width: 18rem">
     <img [src]="product.imageUrl" class="card-img-top" alt="..." />
     <div class="card-body">
